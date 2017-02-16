@@ -15,7 +15,5 @@ hostname = 'localhost'
 port = 20000
 
 s = TCPSocket.open(hostname, port)
-
 s.puts payload
-  
 s.close               # Close the socket when done
