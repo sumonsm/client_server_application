@@ -1,15 +1,16 @@
 require "socket"
 server = TCPServer.new('localhost', port = 20000)
 puts "Server started.\nListening at port #{port} ..."
+
 loop do
   Thread.start(server.accept) do |conn|
-    puts "Connection #{conn} accepted."
+    puts "Connection #{client = conn.gethostname} accepted."
     
-    while line = conn.gets   # Read lines from the socket
-      puts line.chop      # And print with platform line terminator
+    while line = conn.gets
+      puts line.chop
     end
 
-    puts "Connection #{conn} ended."
+    puts "Connection #{client} ended."
     conn.close
   end
 end
