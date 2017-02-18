@@ -39,8 +39,8 @@ class TCPClient
     rescue Errno::ECONNREFUSED => exception
       puts "Could not connect to server.\n\t#{exception.message}"
     rescue => exception
-      puts exception.message
-      puts exception.backtrace
+      puts "ERROR: #{exception.message}"
+      puts "BACKTRACE: #{exception.backtrace.join}"
     end
   end
 
