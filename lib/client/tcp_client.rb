@@ -1,4 +1,4 @@
-require 'lib/client_errors.rb'
+require 'lib/client/client_errors.rb'
 
 class TCPClient
   include ClientErrors
