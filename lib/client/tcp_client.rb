@@ -35,9 +35,9 @@ class TCPClient
     rescue EmptyPayloadException,
            PayloadEncodingException,
            PayloadFormattingException => exception
-      puts "There was a problem with the payload data.\n\t#{exception.message}"
+      puts "ERROR: There was a problem with the payload data.\n\t#{exception.message}"
     rescue Errno::ECONNREFUSED => exception
-      puts "Could not connect to server.\n\t#{exception.message}"
+      puts "ERROR: Could not connect to server.\n\t#{exception.message}"
     rescue => exception
       puts "ERROR: #{exception.message}"
       puts "BACKTRACE: #{exception.backtrace.join}"
