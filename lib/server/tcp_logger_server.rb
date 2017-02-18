@@ -37,7 +37,8 @@ class TCPLoggerServer
   end
 
   private
-
+  
+  # Append text to the log file
   def write_to_log(text)
     File.open(@log_file_path, 'a') do |file|
       # threadsafe write
