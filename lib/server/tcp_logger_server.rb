@@ -20,7 +20,7 @@ class TCPLoggerServer
         Thread.new(server.accept) do |conn|
           puts "Connection #{conn} accepted."
           
-          write_to_log("[#{Timre.now.to_s}] ")
+          write_to_log("[#{Time.now.to_s}] ")
           while line = conn.gets
             puts "Recieved: #{line.chop}\n"
             write_to_log(line.chop)
