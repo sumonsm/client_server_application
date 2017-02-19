@@ -12,7 +12,7 @@ class TCPLoggerServer
       require "socket"
       server = TCPServer.new(@host, @port)
       puts "Server started.\nListening at port: #{@port}"
-      trap("INT") { server_stop }
+      trap("INT") { stopping() }
 
       # Main sever loop
       loop do
@@ -37,9 +37,13 @@ class TCPLoggerServer
     end
   end
 
-  def server_stop
+  def stopping
     puts "\nInterrupt signal recieved.\nStopping server."
     exit 0
+  end
+
+  def server_stop
+    Process.kill 'INT', 0
   end
   
   # Append text to the log file
