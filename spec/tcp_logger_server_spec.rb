@@ -28,4 +28,14 @@ describe "TCPLoggerServer" do
       expect{ subject }.to output("ERROR: There was a problem with the payload data.\n\tERROR: Payload is empty!\n").to_stdout
     end
   end
+
+  describe "#server_start" do
+    subject { @server.server_start }
+    it "erwr" do
+      server = double('server').as_null_object
+      allow(TCPserver).to receive(:open).and_return(server)
+
+      expect(subject).to be(true)
+    end
+  end
 end
