@@ -6,7 +6,8 @@ class TCPLoggerServer
     @log_file_path = File.join('server_log', file_name)
     Thread.abort_on_exception = true
   end
-
+  
+  # Create TCPServer and accept all incoming connections
   def server_start
     begin
       require "socket"
@@ -18,7 +19,7 @@ class TCPLoggerServer
 
       # Main sever loop
       loop do
-        # spawn a thread and accept connection
+        # Spawn a thread and accept connection
         Thread.new(server.accept) do |conn|
           puts "Connection #{conn} accepted."
           
@@ -34,13 +35,13 @@ class TCPLoggerServer
     end
   end
 
-  # just be informative
+  # Just be informative
   def stopping
     puts "\nInterrupt signal recieved.\nStopping server."
     exit 0
   end
   
-  # stop server on ctrl+c
+  # Stop server on ctrl+c
   def server_stop
     Process.kill 'INT', 0
   end
