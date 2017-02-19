@@ -24,7 +24,8 @@ describe "TCPClient" do
     subject { @client.send_payload }
     it "to successfully send payload" do
       socket = double('socket').as_null_object
-      TCPSocket.stub(:open).and_return(socket)
+      #TCPSocket.stub(:open).and_return(socket)
+      allow(TCPSocket).to receive(:open).and_return(socket)
 
       expect(subject).to be(true)
       expect(@client.instance_eval{ payload }).to be_an_instance_of(String)
