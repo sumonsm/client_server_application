@@ -20,11 +20,15 @@ describe "TCPClient" do
     end
   end
   
-  # describe "#send_payload" do
-  #   subject { @client.send_payload }
-  #   it "raises Error" do
-  #     expect(subject).to raise_error(Errno::ECONNREFUSED)
-  #   end
-  # end
+  describe "#send_payload" do
+    subject { @client.send_payload }
+    it "to successfully send payload" do
+      socket = double('socket').as_null_object
+      TCPSocket.stub(:open).and_return(socket)
+
+      expect(subject).to be(true)
+      expect(@client.instance_eval{ payload }).to be_an_instance_of(String)
+    end
+  end
 
 end

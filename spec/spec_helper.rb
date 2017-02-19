@@ -8,4 +8,3 @@ end
 require_relative '../lib/client/tcp_client'
 require_relative '../lib/client/client_errors'
 require_relative '../lib/server/tcp_logger_server'
-

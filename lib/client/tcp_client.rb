@@ -42,6 +42,7 @@ class TCPClient
       puts "ERROR: #{exception.message}"
       puts "BACKTRACE: #{exception.backtrace.join}"
     end
+    return true
   end
 
   private
