@@ -22,14 +22,46 @@ describe "TCPClient" do
   
   describe "#send_payload" do
     subject { @client.send_payload }
-    it "to successfully send payload" do
+    it "successfully sends payload" do
       socket = double('socket').as_null_object
-      #TCPSocket.stub(:open).and_return(socket)
       allow(TCPSocket).to receive(:open).and_return(socket)
 
       expect(subject).to be(true)
       expect(@client.instance_eval{ payload }).to be_an_instance_of(String)
     end
-  end
 
+    it "raises error if it fails to send payload" do
+      allow(TCPSocket).to receive(:open).and_return(nil)
+
+      expect(subject).to be(false)
+    end
+
+    it "handles connection error" do
+      allow(TCPSocket).to receive(:open).and_raise { Errno::ECONNREFUSED.new }
+
+      expect(subject).to be(false)
+    end
+
+    it "handles empty payload issue" do
+      allow(@client).to receive(:payload).and_return(nil)
+      
+      expect{ subject }.to output("ERROR: There was a problem with the payload data.\n\tERROR: Payload is empty!\n").to_stdout
+      expect(subject).to be(false)
+    end
+
+    it "handles payload encoding issues" do
+      allow(@client).to receive(:payload).and_return("foo".force_encoding("ISO-8859-15"))
+      
+      expect{ subject }.to output("ERROR: There was a problem with the payload data.\n\tERROR: Payload is not encoded in UTF-8!\n"
+).to_stdout
+      expect(subject).to be(false)
+    end
+
+    it "handles payload formatting issues" do
+      allow(@client).to receive(:payload).and_return("erewrwr werwerrw\nwrewrr\n".force_encoding("UTF-8"))
+      
+      expect{ subject }.to output("ERROR: There was a problem with the payload data.\n\tERROR: Payload is not formatted correctly!\n").to_stdout
+      expect(subject).to be(false)
+    end
+  end
 end

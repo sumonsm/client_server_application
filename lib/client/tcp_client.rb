@@ -32,17 +32,17 @@ class TCPClient
       socket.close
       puts "Connection closed."
       puts "All done, exiting."
+      return true
     rescue EmptyPayloadException,
            PayloadEncodingException,
            PayloadFormattingException => exception
       puts "ERROR: There was a problem with the payload data.\n\t#{exception.message}"
-    rescue Errno::ECONNREFUSED => exception
-      puts "ERROR: Could not connect to server.\n\t#{exception.message}"
+      return false
     rescue => exception
       puts "ERROR: #{exception.message}"
       puts "BACKTRACE: #{exception.backtrace.join}"
+      return false
     end
-    return true
   end
 
   private
