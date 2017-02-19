@@ -22,18 +22,15 @@ class TCPLoggerServer
           
           write_to_log("[#{Time.now.to_s}] ")
           while line = conn.gets
+            #raise "Empty string recieved" if line.chop == ""
+
             puts "Recieved: #{line.chop}\n"
             write_to_log(line.chop)
           end
-
-          puts "Connection #{conn} ended."
-          conn.close
         end
-        #break if run_once
       end
     rescue => exception
-      puts "ERROR: #{exception.message}"
-      puts "BACKTRACE: #{exception.backtrace.join}"
+      puts "ERROR: #{exception.inspect}"
     end
   end
 
