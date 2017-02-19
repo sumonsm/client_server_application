@@ -1,6 +1,7 @@
 require 'client/client_errors.rb'
 
 class TCPClient
+  # include custom exceptions
   include ClientErrors
     
   # Initialize variables
@@ -10,12 +11,15 @@ class TCPClient
     @bytes_to_read = bytes || 1024
     @payload = nil
   end
- 
+  
+  # Expose the payload
+  # Return: Payload string
   def payload
     @payload
   end
   
   # Get payload data, validate, connect to server using TCP socket and send payload
+  # Return: true/false based on success or failure
   def send_payload
     begin
       read_payload

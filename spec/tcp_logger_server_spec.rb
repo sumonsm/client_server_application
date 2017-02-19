@@ -13,7 +13,7 @@ describe "TCPLoggerServer Live Mode" do
     @server_stop
   end
 
-  describe "#server_start with valid data" do
+  describe "#server_start" do
     subject do
       socket = TCPSocket.open("127.0.0.1", 4001)
       socket.puts "testing"
@@ -23,17 +23,6 @@ describe "TCPLoggerServer Live Mode" do
       expect{ subject }.to output(/Connection #<TCPSocket:.*> accepted.\nRecieved: testing\n/).to_stdout
     end
   end
-
-  # describe "#server_start with valid data" do
-  #   subject do
-  #     socket = TCPSocket.open("127.0.0.1", 4001)
-  #     socket.puts ""
-  #     sleep 1
-  #   end
-  #   it "Sever accepts TCP connection and recieves empty data" do
-  #     expect{ subject }.to raise_error("Empty string recieved")
-  #   end
-  # end
 end
 
 describe "TCPLoggerServer" do

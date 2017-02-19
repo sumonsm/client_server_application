@@ -34,11 +34,13 @@ class TCPLoggerServer
     end
   end
 
+  # just be informative
   def stopping
     puts "\nInterrupt signal recieved.\nStopping server."
     exit 0
   end
-
+  
+  # stop server on ctrl+c
   def server_stop
     Process.kill 'INT', 0
   end
