@@ -28,6 +28,7 @@ class TCPClient
       puts "Establishing connecting with server at:\n\t#{@hostname}:#{@port}"
       require 'socket'
       socket = TCPSocket.open(@hostname, @port)
+      return false if socket.nil?
       
       puts "Sending payload:\n#{payload}\n"
       socket.puts payload
@@ -44,7 +45,6 @@ class TCPClient
       return false
     rescue => exception
       puts "ERROR: #{exception.message}"
-      puts "BACKTRACE: #{exception.backtrace.join}"
       return false
     end
   end

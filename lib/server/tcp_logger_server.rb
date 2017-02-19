@@ -11,6 +11,8 @@ class TCPLoggerServer
     begin
       require "socket"
       server = TCPServer.new(@host, @port)
+      return if server.nil?
+
       puts "Server started.\nListening at port: #{@port}"
       trap("INT") { stopping() }
 
@@ -22,8 +24,6 @@ class TCPLoggerServer
           
           write_to_log("[#{Time.now.to_s}] ")
           while line = conn.gets
-            #raise "Empty string recieved" if line.chop == ""
-
             puts "Recieved: #{line.chop}\n"
             write_to_log(line.chop)
           end
