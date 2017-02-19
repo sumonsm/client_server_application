@@ -29,6 +29,7 @@ class TCPLoggerServer
           puts "Connection #{conn} ended."
           conn.close
         end
+        #break if run_once
       end
     rescue => exception
       puts "ERROR: #{exception.message}"
