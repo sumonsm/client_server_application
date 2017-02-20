@@ -13,7 +13,7 @@ describe "TCPLoggerServer Live Mode" do
     @server_stop
   end
 
-  describe "#server_start" do
+  describe "#server_start with valid parameters" do
     subject do
       socket = TCPSocket.open("127.0.0.1", 4001)
       socket.puts "testing"
@@ -21,6 +21,17 @@ describe "TCPLoggerServer Live Mode" do
     end
     it "Sever accepts TCP connection and recieves data" do
       expect{ subject }.to output(/Connection #<TCPSocket:.*> accepted.\nRecieved: testing\n/).to_stdout
+    end
+  end
+
+  describe "#server_start with invalid parameters" do
+    subject do
+      socket = TCPSocket.open("127.0.0.1", 00)
+      socket.puts "testing"
+      sleep 1
+    end
+    it "Sever rejects TCP connection and raises error" do
+      expect{ subject }.to raise_error(Errno::ECONNREFUSED)
     end
   end
 end
