@@ -7,7 +7,7 @@ Readme
 ==================
 
 a. Install the ruby gem "bundler" using the command "gem install bundler".
-b. Run the command "bundle install" from the Code directory.
+b. Run the command "bundle install" from the Code directory. This will install all the dependency gems.
 c. Run the test suite using the command "rake spec" from the Code directory.
 d. Check code coverage by opening the file "Code/coverage/index.html".
 
@@ -33,8 +33,8 @@ None.
 
 5. How to run:
 ==========================
-a. From Code/ directory, run server with "ruby lib/server.rb". CTRL+C to close server process.
-f. From Code/ directory, run client with "ruby lib/client.rb".
+a. From Code/ directory, run server with "bin/server [hostname] [port]". CTRL+C to close server process.
+f. From Code/ directory, run client with "bin/client [hostname] [port] [logfile]".
 g. Check sever log in Code/server_log/ directory.
 
 
@@ -48,3 +48,4 @@ None.
 ==========================
 
 Instruction says, this is a 7 day project. Then I got an email telling me I had 3 total days to finish it. But I could extent the time. So, I think it was just a miscommunication and the instuction probably needs to be updated.
+s

@@ -1,8 +1,10 @@
 require 'client/client_errors.rb'
+require 'client/text_utilities.rb'
 
 class TCPClient
   # include custom exceptions
   include ClientErrors
+  include TextUtilities
     
   # Initialize variables
   def initialize(hostname=nil, port=nil, bytes=nil)
@@ -59,26 +61,12 @@ class TCPClient
     formatted_str = format_string(utf8_str)
     @payload      = formatted_str
   end
-  
+
   # Validates that payload is correct
   # Return: Payload string
   def validate_payload
     raise EmptyPayloadException.new unless payload
     raise PayloadEncodingException.new unless payload.encoding.to_s == "UTF-8"
     raise PayloadFormattingException.new if payload =~ / /
-  end
-  
-  # Encode ASCII string to UTF-8
-  # Return: UTF-8 string
-  def ascii_to_utf8(ascii_str=nil)
-    return nil unless ascii_str
-    return utf8_str = ascii_str.encode("UTF-8", invalid: :replace, undef: :replace)
-  end
-
-  # Format string in desired pattern
-  # Return: Formatted string
-  def format_string(str=nil)
-    return nil unless str
-    return str.gsub(/\s/, "*")
   end
 end
