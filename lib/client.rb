@@ -1,4 +1,8 @@
 $:.unshift File.join(File.dirname(__FILE__))
 require 'client/tcp_client.rb'
 
-TCPClient.new.send_payload ARGV[0], ARGV[1], 1024
+host = ARGV[0] || 'localhost'
+port = ARGV[1] || 3001
+bytes = 1024
+
+TCPClient.new(host, port, bytes).send_payload

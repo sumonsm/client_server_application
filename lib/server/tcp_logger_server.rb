@@ -51,7 +51,7 @@ class TCPLoggerServer
     File.open(@log_file_path, 'a') do |file|
       # threadsafe write
       file.flock(File::LOCK_EX)
-      file << text
+      file.puts text
       file.flush
       file.flock(File::LOCK_UN)
     end
