@@ -14,7 +14,7 @@ class TCPLoggerServer
       server = TCPServer.new(@host, @port)
       return if server.nil?
 
-      puts "Server started.\nListening at port: #{@port}"
+      puts "Server started.\nListening at port: #{@port}\nLog file: #{@log_file_path}"
       trap("INT") { stopping() }
 
       # Main sever loop
